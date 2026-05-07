@@ -18,7 +18,7 @@ st.title("Safety Document QA Assistant - FAISS Dropbox Version")
 # --- Dropbox FAISS paths ---
 FAISS_INDEXES = {
     "Industrial Hygiene FAISS Index": {
-        "dropbox_folder": "/rag_indexes/ih_faiss_index",
+        "dropbox_folder": "/ih_faiss_index",
         "local_folder": "ih_faiss_index"
     }
 }
