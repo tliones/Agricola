@@ -1,0 +1,7 @@
+streamlit
+openai
+dropbox
+langchain
+langchain-community
+langchain-openai
+faiss-cpu
