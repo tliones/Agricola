@@ -24,17 +24,25 @@ st.title("Safety Document QA Assistant - FAISS Dropbox Version")
 # Secrets Check
 # =========================
 
-if "OPENAI_API_KEY" not in st.secrets:
-    st.error("Missing OPENAI_API_KEY in Streamlit Secrets.")
-    st.stop()
+required_secrets = [
+    "OPENAI_API_KEY",
+    "DROPBOX_APP_KEY",
+    "DROPBOX_APP_SECRET",
+    "DROPBOX_REFRESH_TOKEN",
+]
 
-if "DROPBOX_TOKEN" not in st.secrets:
-    st.error("Missing DROPBOX_TOKEN in Streamlit Secrets.")
-    st.stop()
+for secret in required_secrets:
+    if secret not in st.secrets:
+        st.error(f"Missing {secret} in Streamlit Secrets.")
+        st.stop()
 
 client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
-dbx = dropbox.Dropbox(st.secrets["DROPBOX_TOKEN"])
 
+dbx = dropbox.Dropbox(
+    oauth2_refresh_token=st.secrets["DROPBOX_REFRESH_TOKEN"],
+    app_key=st.secrets["DROPBOX_APP_KEY"],
+    app_secret=st.secrets["DROPBOX_APP_SECRET"],
+)
 
 # =========================
 # Dropbox FAISS Index Paths
